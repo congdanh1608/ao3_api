@@ -1,4 +1,3 @@
-# Trong file AO3/app.py
 from . import extra, utils
 from .chapters import Chapter
 from .comments import Comment
