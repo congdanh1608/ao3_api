@@ -8,37 +8,21 @@
 
 
 from flask import Flask, jsonify
-from AO3 import Work
+from works import Work  
 
 app = Flask(__name__)
 
-@app.route('/works/<int:workid>', methods=['GET'])
-def get_work(workid):
+@app.route('/works/<int:work_id>', methods=['GET'])
+def get_work(work_id):
     try:
-        # Tạo một đối tượng Work với workid
-        work = Work(workid)
+        work = Work(work_id)
+        return jsonify(work.metadata)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 404
 
-        # Gọi reload để tải thông tin về công việc
-        work.reload()
+if __name__ == '__main__':
+    app.run(debug=True)
 
-        # Chuẩn bị dữ liệu để trả về dưới dạng JSON
-        response_data = {
-            'work_id': work.id,
-            'title': work.title,
-            'chapters': [
-                {
-                    'chapter_id': chapter.id,
-                    'chapter_title': chapter.title,
-                    # ... Các thông tin khác mà bạn muốn trả về
-                }
-                for chapter in work.chapters
-            ]
-        }
-
-        return jsonify(response_data)
-
-    except utils.InvalidIdError as e:
-        return jsonify({'error': str(e)}), 404  # Trả về mã lỗi 404 nếu không tìm thấy công việc
 
 if __name__ == '__main__':
     app.run(debug=True)
