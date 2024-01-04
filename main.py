@@ -8,10 +8,6 @@
 
 from AO3 import works
 
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
-
-@app.get("/works/{workid}")
+@works.get("/works/{workid}")
 def work(workid: int):
     return {"workid": workid}
