@@ -8,7 +8,7 @@
 
 
 from flask import Flask, jsonify
-from works import Work  
+from AO3 import Work  
 
 app = Flask(__name__)
 
