@@ -6,12 +6,12 @@
 #     uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)
 
 
-from AO3 import app
+from AO3 import works
 
 @app.get("/")
 def read_root():
     return {"Hello": "World"}
 
-@app.get("/works/{item_id}")
-def read_item(item_id: int):
-    return {"item_id": item_id}
+@app.get("/works/{workid}")
+def work(workid: int):
+    return {"workid": workid}
